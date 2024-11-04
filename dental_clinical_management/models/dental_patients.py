@@ -23,13 +23,12 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 from odoo.tools import email_normalize
 
-
 class DentalPatients(models.Model):
     """To create Patients in the clinic, use res.partner model and customize it"""
     _inherit = 'res.partner'
 
     company_type = fields.Selection(selection_add=[('person', 'Patient'),
-                                                   ('company', 'Medicine Distibutor')],
+                                                   ('company', 'Medicine Distributor')],
                                     help="Patient type")
     dob = fields.Date(string="Date of Birth",
                       help="DOB of the patient")
@@ -61,17 +60,20 @@ class DentalPatients(models.Model):
                                  string='X-Ray',
                                  help="To add the xray reports of the patient")
 
+    # New fields for Beauty and Skincare Clinic
+    skin_type = fields.Selection([
+        ('dry', 'Dry'),
+        ('oily', 'Oily'),
+        ('combination', 'Combination'),
+        ('sensitive', 'Sensitive'),
+    ], string='Skin Type')
+    
+    past_treatments = fields.Text(string='Past Treatments')
+    allergies = fields.Text(string='Known Allergies')
+    preferred_products = fields.Text(string='Preferred Products')
+
     @api.model
     def create(self, vals):
-        """Overrides the create method to handle additional logic for DentalPatients.
-        When a new DentalPatient is created, It then proceeds to create a portal
-        wizard for the patient to grant them access to the portal.
-
-        If the `company_type` is not `person`, it assumes the record is for a
-        Medicine Distributor or another entity. In this case, it creates a user
-        from a template with predefined groups and permissions, and normalizes
-        the email address for consistency."""
-
         if 'company_type' in vals and vals['company_type'] == 'person':
             vals['is_patient'] = True
         res = super(DentalPatients, self).create(vals)
@@ -110,11 +112,6 @@ class DentalPatients(models.Model):
 
     @api.depends('dob')
     def _compute_patient_age(self):
-        """Computes the age of the patient based on their date of birth (dob)
-        and updates the `patient_age` field. The age is calculated by subtracting
-        the year of the patient's dob from the current year. If the current
-        date is before the patient's birthday in the current year, one year is
-        subtracted from the age."""
         for record in self:
             record.patient_age = (fields.date.today().year - record.dob.year -
                                   ((fields.date.today().month,fields.date.today().day) <
