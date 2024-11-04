@@ -6,16 +6,16 @@
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <!-- Added custom fields -->
-            <xpath expr="//field[@name='vat']" position="after">
-                <field name="dob"/>
-                <field name="patient_age"/>
-                <field name="is_patient" invisible="1"/>
+            <xpath expr="//div[@class='o_address_format']" position="after">
+                    <field name="dob"/>
+                    <field name="patient_age"/>
+                    <field name="is_patient" invisible="1"/>
             </xpath>
             <xpath expr="//field[@name='function']" position="replace">
                 <field name="sex" widget="radio"/>
             </xpath>
-            <!-- Add new tab for Beauty and Skincare Details -->
-            <xpath expr="//notebook" position="inside">
+            <!-- Add new tab for Beauty and Skincare Details after Contacts and Addresses tab -->
+            <xpath expr="//page[@name='contact_addresses']" position="after">
                 <page string="Beauty and Skincare Details">
                     <group>
                         <field name="skin_type" string="Skin Type"/>
