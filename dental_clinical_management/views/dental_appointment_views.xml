@@ -78,6 +78,13 @@
                             <field name="date"/>
                             <field name="reason"/>
                         </group>
+                        <!-- New Fields for Beauty and Skincare Clinic -->
+                        <group>
+                            <field name="treatment_type"/>
+                            <field name="beautician_id"/>
+                            <field name="room_number"/>
+                            <field name="notes"/>
+                        </group>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -106,6 +113,9 @@
                        decoration-warning="state == 'new'"
                        decoration-success="state == 'done'"
                        decoration-danger="state == 'cancel'"/>
+                <!-- New Fields for Beauty and Skincare Clinic -->
+                <field name="treatment_type"/>
+                <field name="beautician_id"/>
             </tree>
         </field>
     </record>

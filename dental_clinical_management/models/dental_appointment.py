@@ -1,26 +1,4 @@
-# -*- coding: utf-8 -*-
-################################################################################
-#
-#    Cybrosys Technologies Pvt. Ltd.
-#
-#    Copyright (C) 2024-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
-#    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
-#
-#    You can modify it under the terms of the GNU AFFERO
-#    GENERAL PUBLIC LICENSE (AGPL v3), Version 3.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU AFFERO GENERAL PUBLIC LICENSE (AGPL v3) for more details.
-#
-#    You should have received a copy of the GNU AFFERO GENERAL PUBLIC LICENSE
-#    (AGPL v3) along with this program.
-#    If not, see <http://www.gnu.org/licenses/>.
-#
-################################################################################
 from odoo import api, fields, models, _
-
 
 class DentalAppointment(models.Model):
     """Patient dental appointment details"""
@@ -55,7 +33,7 @@ class DentalAppointment(models.Model):
     doctor_id = fields.Many2one('hr.employee', string="Doctor",
                                 required=True,
                                 domain="[('id', 'in', doctor_ids)]",
-                                help="Name the of the doctor")
+                                help="Name of the doctor")
     time_shift_ids = fields.Many2many('dental.time.shift',
                                       string="Time Shift",
                                       help="Choose the time shift",
@@ -66,15 +44,27 @@ class DentalAppointment(models.Model):
                                help="Choose the time shift")
     date = fields.Date(string="Date", required=True,
                        default=fields.date.today(),
-                       help="Date when to take appointment for doctor")
-    reason = fields.Text(string="Please describe the reason",
-                         help="Just explain about the reason to take doctor appointment")
+                       help="Date for the appointment")
+    reason = fields.Text(string="Reason for Appointment",
+                         help="Describe the reason for the appointment")
     state = fields.Selection([('draft', 'Draft'),
                               ('new', 'New Appointment'),
                               ('done', 'Prescribed'),
-                              ('cancel', 'Cancel')],
+                              ('cancel', 'Cancelled')],
                              default="draft",
-                             string="State", help="state of the appointment")
+                             string="State", help="State of the appointment")
+
+    # New Fields for Beauty and Skincare Clinic
+    treatment_type = fields.Selection([
+        ('facial', 'Facial'),
+        ('massage', 'Massage'),
+        ('manicure', 'Manicure'),
+        ('pedicure', 'Pedicure'),
+        ('haircare', 'Haircare')
+    ], string='Treatment Type', required=True)
+    beautician_id = fields.Many2one('hr.employee', string='Beautician', domain="[('job_id', '=', 'Beautician')]")
+    room_number = fields.Char(string='Room Number')
+    notes = fields.Text(string='Appointment Notes')
 
     @api.model
     def create(self, vals):
@@ -93,7 +83,7 @@ class DentalAppointment(models.Model):
         return res
 
     def action_create_appointment(self):
-        """Change the state of the appointment while click create button"""
+        """Change the state of the appointment when create button is clicked"""
         self.state = 'new'
 
     @api.depends('doctor_id')
@@ -105,7 +95,7 @@ class DentalAppointment(models.Model):
 
     @api.depends('specialist_id')
     def _compute_doctor_ids(self):
-        """Searching for doctors based on there specialization"""
+        """Searching for doctors based on their specialization"""
         for record in self:
             if record.specialist_id:
                 record.doctor_ids = self.env['hr.employee'].search(
@@ -114,12 +104,11 @@ class DentalAppointment(models.Model):
                 record.doctor_ids = self.env['hr.employee'].search([]).ids
 
     def action_cancel(self):
-        """Change the state of the appointment while click cancel button"""
+        """Change the state of the appointment when cancel button is clicked"""
         self.state = 'cancel'
 
     def action_prescription(self):
-        """Created the action for view the prescriptions
-        of 'done' state appointments"""
+        """View the prescriptions of 'done' state appointments"""
         return {
             'type': 'ir.actions.act_window',
             'target': 'inline',
