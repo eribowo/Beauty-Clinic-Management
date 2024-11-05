@@ -6,8 +6,12 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
-            <!-- Add Role Type radio button with label "Role" and horizontal alignment -->
-            <xpath expr="//field[@name='job_title']" position="before">
+            <!-- Added new field by replacing the field job_title -->
+            <xpath expr="//field[@name='job_title']" position="replace">
+                <field name="job_position" placeholder="Job Position"/>
+            </xpath>
+            <!-- Add Role Type radio button with label "Role" and horizontal alignment under Job Position -->
+            <xpath expr="//field[@name='job_position']" position="after">
                 <group>
                     <field name="role_type" widget="radio" string="Role" options="{'horizontal': true}"/>
                 </group>
@@ -33,10 +37,6 @@
                         </tree>
                     </field>
                 </page>
-            </xpath>
-            <!-- Added new field by replacing the field job_title -->
-            <xpath expr="//field[@name='job_title']" position="replace">
-                <field name="job_position" placeholder="Job Position"/>
             </xpath>
             <!-- Replace the field job_id -->
             <xpath expr="//field[@name='job_id']" position="replace">
