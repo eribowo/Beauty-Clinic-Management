@@ -6,8 +6,9 @@ class DentalDoctor(models.Model):
 
     role_type = fields.Selection([
         ('doctor', 'Doctor'),
-        ('beautician', 'Beautician')
-    ], string="Role Type", required=True, help="Select role type: Doctor or Beautician")
+        ('beautician', 'Beautician'),
+        ('employee', 'Employee')
+    ], string="Role Type", required=True, help="Select role type: Doctor, Beautician or Employee")
     
     job_position = fields.Char(string="Designation",
                                help="To add the job position of the doctor or beautician")
