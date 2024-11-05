@@ -6,10 +6,10 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
-            <!-- Add Role Type radio button with label "Role" -->
+            <!-- Add Role Type radio button with label "Role" and horizontal alignment -->
             <xpath expr="//field[@name='job_title']" position="before">
                 <group>
-                    <field name="role_type" widget="radio" string="Role"/>
+                    <field name="role_type" widget="radio" string="Role" options="{'horizontal': true}"/>
                 </group>
             </xpath>
             <!-- Added custom fields -->
