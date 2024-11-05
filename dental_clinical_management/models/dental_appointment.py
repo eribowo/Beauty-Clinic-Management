@@ -56,7 +56,7 @@ class DentalAppointment(models.Model):
 
     # New Fields for Beauty and Skincare Clinic
     treatment_id = fields.Many2one('dental.treatment', string='Treatment', required=True)
-    beautician_id = fields.Many2one('hr.employee', string='Beautician', domain="[('job_id', '=', 'Beautician')]")
+    beautician_id = fields.Many2one('hr.employee', string='Beautician', domain="[('role_type', '=', 'beautician')]")
     room_number = fields.Char(string='Room Number')
     notes = fields.Text(string='Appointment Notes')
 

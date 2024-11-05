@@ -117,6 +117,8 @@
                 <!-- New Fields for Beauty and Skincare Clinic -->
                 <field name="treatment_id"/>
                 <field name="beautician_id"/>
+                <field name="room_number"/> 
+                <field name="notes"/>
             </tree>
         </field>
     </record>
