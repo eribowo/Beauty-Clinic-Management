@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!--    Search, Filter, Group-->
     <record id="dental_appointment_search" model="ir.ui.view">
@@ -30,6 +30,7 @@
             </search>
         </field>
     </record>
+
     <!-- Dental Appointment page to take appointments for patients -->
     <record id="dental_appointment_view_form" model="ir.ui.view">
         <field name="name">dental.appointment.view.form</field>
@@ -80,7 +81,7 @@
                         </group>
                         <!-- New Fields for Beauty and Skincare Clinic -->
                         <group>
-                            <field name="treatment_type"/>
+                            <field name="treatment_id" string="Treatment"/>
                             <field name="beautician_id"/>
                             <field name="room_number"/>
                             <field name="notes"/>
@@ -114,7 +115,7 @@
                        decoration-success="state == 'done'"
                        decoration-danger="state == 'cancel'"/>
                 <!-- New Fields for Beauty and Skincare Clinic -->
-                <field name="treatment_type"/>
+                <field name="treatment_id"/>
                 <field name="beautician_id"/>
             </tree>
         </field>
