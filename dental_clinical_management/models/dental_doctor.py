@@ -1,33 +1,16 @@
-# -*- coding: utf-8 -*-
-################################################################################
-#
-#    Cybrosys Technologies Pvt. Ltd.
-#
-#    Copyright (C) 2024-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
-#    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
-#
-#    You can modify it under the terms of the GNU AFFERO
-#    GENERAL PUBLIC LICENSE (AGPL v3), Version 3.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU AFFERO GENERAL PUBLIC LICENSE (AGPL v3) for more details.
-#
-#    You should have received a copy of the GNU AFFERO GENERAL PUBLIC LICENSE
-#    (AGPL v3) along with this program.
-#    If not, see <http://www.gnu.org/licenses/>.
-#
-################################################################################
 from odoo import api, fields, models
-
 
 class DentalDoctor(models.Model):
     """To add the doctors of the clinic"""
     _inherit = 'hr.employee'
 
+    role_type = fields.Selection([
+        ('doctor', 'Doctor'),
+        ('beautician', 'Beautician')
+    ], string="Role Type", required=True, help="Select role type: Doctor or Beautician")
+    
     job_position = fields.Char(string="Designation",
-                               help="To add the job position of the doctor")
+                               help="To add the job position of the doctor or beautician")
     specialised_in_id = fields.Many2one('dental.specialist',
                                         string='Specialised In',
                                         help="Add the doctor specialised")
