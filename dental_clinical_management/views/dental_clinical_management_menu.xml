@@ -84,6 +84,12 @@
         <field name="res_model">xray.report</field>
         <field name="view_mode">form</field>
     </record>
+    <!--Menu Action view for Beauty Skin Types-->
+    <record id="beauty_skin_type_menu_action" model="ir.actions.act_window">
+        <field name="name">Skin Types</field>
+        <field name="res_model">beauty.skin.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
     <!-- Added Menus-->
     <menuitem id="dentist_menu_root"
               web_icon="dental_clinical_management,static/description/icon.png"
@@ -106,4 +112,5 @@
     <menuitem id="medical_questions_main_menu" name="Medical Questions" parent="medical_procedures_main_menu" sequence="5" action="medical_questions_menu_action"/>
     <menuitem id="insurance_main_menu" name="Insurance" parent="config_main_menu" sequence="3"/>
     <menuitem id="insuarnce_company_main_menu" name="Insurance Company" parent="insurance_main_menu" sequence="1" action="insurance_company_menu_action"/>
+    <menuitem id="skin_type_main_menu" name="Skin Types" parent="medical_procedures_main_menu" sequence="6" action="beauty_skin_type_menu_action"/>
 </odoo>

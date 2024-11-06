@@ -25,3 +25,4 @@ access_manager_dental_specialist,access.manager.dental.specialist,model_dental_s
 access_manager_treatment_category,access.manager.treatment.category,model_treatment_category,dental_clinical_management.group_dental_manager,1,1,1,1
 access_manager_dental_treatment,access.manager.dental.treatment,model_dental_treatment,dental_clinical_management.group_dental_manager,1,1,1,1
 access_manager_insurance_company,access.manager.insurance.company,model_insurance_company,dental_clinical_management.group_dental_manager,1,1,1,1
+access_beauty_skin_type_user,access_beauty_skin_type_user,model_beauty_skin_type,base.group_user,1,1,1,1

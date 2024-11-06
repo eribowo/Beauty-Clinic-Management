@@ -22,7 +22,7 @@
             <xpath expr="//page[@name='contact_addresses']" position="after">
                 <page string="Beauty and Skincare Details">
                     <group>
-                        <field name="skin_type" string="Skin Type"/>
+                        <field name="skin_type_id" string="Skin Type"/>
                         <field name="past_treatments" string="Past Treatments"/>
                         <field name="allergies" string="Known Allergies"/>
                         <field name="preferred_products" string="Preferred Products"/>

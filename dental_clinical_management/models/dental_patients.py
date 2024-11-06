@@ -2,6 +2,12 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 from odoo.tools import email_normalize
 
+class SkinType(models.Model):
+    _name = 'beauty.skin.type'
+    _description = 'Beauty Skin Type'
+
+    name = fields.Char(string='Skin Type', required=True)
+
 class DentalPatients(models.Model):
     """To create Patients in the clinic, use res.partner model and customize it"""
     _inherit = 'res.partner'
@@ -39,14 +45,9 @@ class DentalPatients(models.Model):
                                  string='X-Ray',
                                  help="To add the xray reports of the patient")
 
-    # New fields for Beauty and Skincare Clinic
-    skin_type = fields.Selection([
-        ('dry', 'Dry'),
-        ('oily', 'Oily'),
-        ('combination', 'Combination'),
-        ('sensitive', 'Sensitive'),
-    ], string='Skin Type')
-    
+    # New field for Beauty and Skincare Clinic
+    skin_type_id = fields.Many2one('beauty.skin.type', string='Skin Type')
+
     past_treatments = fields.Text(string='Past Treatments')
     allergies = fields.Text(string='Known Allergies')
     preferred_products = fields.Text(string='Preferred Products')
