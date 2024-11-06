@@ -26,7 +26,7 @@ class DentalPrescription(models.Model):
     token_no = fields.Integer(related="appointment_id.token_no",
                               string="Token Number",
                               help="Token number of the patient")
-    treatment_ids = fields.Many2many('dental.treatment',
+    treatment_ids = fields.Many2many(related="appointment_id.treatment_ids",
                                      string="Treatments",
                                      help="Treatments done for patient")
     cost = fields.Float(compute="_compute_total_cost",
