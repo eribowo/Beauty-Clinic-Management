@@ -1,26 +1,4 @@
-# -*- coding: utf-8 -*-
-################################################################################
-#
-#    Cybrosys Technologies Pvt. Ltd.
-#
-#    Copyright (C) 2024-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
-#    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
-#
-#    You can modify it under the terms of the GNU AFFERO
-#    GENERAL PUBLIC LICENSE (AGPL v3), Version 3.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU AFFERO GENERAL PUBLIC LICENSE (AGPL v3) for more details.
-#
-#    You should have received a copy of the GNU AFFERO GENERAL PUBLIC LICENSE
-#    (AGPL v3) along with this program.
-#    If not, see <http://www.gnu.org/licenses/>.
-#
-################################################################################
 from odoo import api, fields, models, _
-
 
 class DentalPrescription(models.Model):
     """Prescription of patient from the dental clinic"""
@@ -48,12 +26,12 @@ class DentalPrescription(models.Model):
     token_no = fields.Integer(related="appointment_id.token_no",
                               string="Token Number",
                               help="Token number of the patient")
-    treatment_id = fields.Many2one('dental.treatment',
-                                   string="Treatment",
-                                   help="Name of the treatment done for patient")
-    cost = fields.Float(related="treatment_id.cost",
-                        string="Treatment Cost",
-                        help="Cost of treatment")
+    treatment_ids = fields.Many2many('dental.treatment',
+                                     string="Treatments",
+                                     help="Treatments done for patient")
+    cost = fields.Float(compute="_compute_total_cost",
+                        string="Total Treatment Cost",
+                        help="Total cost of treatments")
     currency_id = fields.Many2one('res.currency', 'Currency',
                                   default=lambda self: self.env.user.company_id.currency_id,
                                   required=True,
@@ -102,6 +80,12 @@ class DentalPrescription(models.Model):
             rec.appointment_ids = self.env['dental.appointment'].search(
                 [('state', '=', 'new'), ('date', '=', fields.Date.today())]).ids
 
+    @api.depends('treatment_ids')
+    def _compute_total_cost(self):
+        """Computes the total cost of treatments."""
+        for rec in self:
+            rec.cost = sum(treatment.cost for treatment in rec.treatment_ids)
+
     def action_prescribed(self):
         """Marks the prescription and its associated appointment as `done`.
         This method updates the state of both the DentalPrescription instance
@@ -119,10 +103,10 @@ class DentalPrescription(models.Model):
             'partner_id': self.patient_id.id,
             'invoice_line_ids': [
                 fields.Command.create({
-                    'name': self.treatment_id.name,
+                    'name': treatment.name,
                     'quantity': 1,
-                    'price_unit': self.cost,
-                })
+                    'price_unit': treatment.cost,
+                }) for treatment in self.treatment_ids
             ]
         }
         invoice = self.env['account.move'].create(invoice_vals)
