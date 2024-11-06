@@ -32,7 +32,7 @@ class DentalAppointment(models.Model):
                                   string="Doctors Data", help="Doctors Data")
     doctor_id = fields.Many2one('hr.employee', string="Doctor",
                                 required=True,
-                                domain="[('id', 'in', doctor_ids)]",
+                                domain="[('role_type', '=', 'doctor')]",
                                 help="Name of the doctor")
     time_shift_ids = fields.Many2many('dental.time.shift',
                                       string="Time Shift",
@@ -55,7 +55,7 @@ class DentalAppointment(models.Model):
                              string="State", help="State of the appointment")
 
     # New Fields for Beauty and Skincare Clinic
-    treatment_id = fields.Many2one('dental.treatment', string='Treatment', required=True)
+    treatment_ids = fields.Many2many('dental.treatment', string='Treatments')
     beautician_id = fields.Many2one('hr.employee', string='Beautician', domain="[('role_type', '=', 'beautician')]")
     room_number = fields.Char(string='Room Number')
     notes = fields.Text(string='Appointment Notes')

@@ -81,7 +81,7 @@
                         </group>
                         <!-- New Fields for Beauty and Skincare Clinic -->
                         <group>
-                            <field name="treatment_id" string="Treatment"/>
+                            <field name="treatment_ids" widget="many2many_tags" string="Treatments"/>
                             <field name="beautician_id"/>
                             <field name="room_number"/>
                             <field name="notes"/>
@@ -115,10 +115,8 @@
                        decoration-success="state == 'done'"
                        decoration-danger="state == 'cancel'"/>
                 <!-- New Fields for Beauty and Skincare Clinic -->
-                <field name="treatment_id"/>
+                <field name="treatment_ids" widget="many2many_tags" string="Treatments"/>
                 <field name="beautician_id"/>
-                <field name="room_number"/> 
-                <field name="notes"/>
             </tree>
         </field>
     </record>

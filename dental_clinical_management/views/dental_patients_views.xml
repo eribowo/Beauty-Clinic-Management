@@ -7,12 +7,16 @@
         <field name="arch" type="xml">
             <!-- Added custom fields -->
             <xpath expr="//div[@class='o_address_format']" position="after">
-                    <field name="dob"/>
-                    <field name="patient_age"/>
-                    <field name="is_patient" invisible="1"/>
+                <field name="dob"/>
+                <field name="patient_age"/>
+                <field name="is_patient" invisible="1"/>
             </xpath>
             <xpath expr="//field[@name='function']" position="replace">
                 <field name="sex" widget="radio"/>
+            </xpath>
+            <!-- Make email not mandatory -->
+            <xpath expr="//field[@name='email']" position="attributes">
+                <attribute name="required">0</attribute>
             </xpath>
             <!-- Add new tab for Beauty and Skincare Details after Contacts and Addresses tab -->
             <xpath expr="//page[@name='contact_addresses']" position="after">
