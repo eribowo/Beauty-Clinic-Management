@@ -72,6 +72,10 @@ class DentalAppointment(models.Model):
              ('shift_id', '=', int(vals['shift_id']))],
             order='id desc', limit=1)
         vals['token_no'] = last_token.token_no + 1 if last_token else 1
+        # Ensure that any new patient is marked as a patient
+        if 'patient_id' in vals:
+            patient = self.env['res.partner'].browse(vals['patient_id'])
+            patient.write({'is_patient': True})
         res = super(DentalAppointment, self).create(vals)
         res.state = 'new'
         return res
