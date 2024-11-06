@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!--    Search, Filter, Group-->
+    <!-- Search, Filter, Group-->
     <record id="dental_prescription_search" model="ir.ui.view">
         <field name="name">dental.prescription.search</field>
         <field name="model">dental.prescription</field>
@@ -13,7 +13,7 @@
                 <filter string="Today's Prescription" name="today"
                         domain="[('prescription_date', '=', context_today())]"/>
                 <filter string="Yesterday's Prescription" name="yesterday"
-                        domain="[('prescription_date', '=',  ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00')))]"/>
+                        domain="[('prescription_date', '=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00')))]"/>
                 <!-- Group By -->
                 <group expand="0" string="group by">
                     <filter name="invoiced" string="Invoiced"
@@ -26,7 +26,8 @@
             </search>
         </field>
     </record>
-    <!--  Form View-->
+
+    <!-- Form View-->
     <record id="dental_prescription_view_form" model="ir.ui.view">
         <field name="name">dental.prescription.view.form</field>
         <field name="model">dental.prescription</field>
@@ -102,7 +103,8 @@
             </form>
         </field>
     </record>
-    <!--  Tree View-->
+
+    <!-- Tree View-->
     <record id="dental_prescription_view_tree" model="ir.ui.view">
         <field name="name">dental.prescription.view.tree</field>
         <field name="model">dental.prescription</field>

@@ -163,9 +163,9 @@ class DentalPrescriptionLines(models.Model):
     _rec_name = "medicament_id"
 
     medicament_id = fields.Many2one('product.template',
-                                    domain="[('is_medicine', '=', True)]",
+                                    domain="[('sale_ok', '=', True)]",
                                     string="Medicament",
-                                    help="Name of the medicine")
+                                    help="Name of the medicament")
     generic_name = fields.Char(string="Generic Name",
                                related="medicament_id.generic_name",
                                help="Generic name of the medicament")
@@ -173,12 +173,12 @@ class DentalPrescriptionLines(models.Model):
                                      related="medicament_id.dosage_strength",
                                      help="Dosage strength of medicament")
     medicament_form = fields.Selection([('tablet', 'Tablets'),
-                             ('capsule', 'Capsules'),
-                             ('liquid', 'Liquid'),
-                             ('injection', 'Injections')],
-                            string="Medicament Form",
-                            required=True,
-                            help="Add the form of the medicine")
+                                        ('capsule', 'Capsules'),
+                                        ('liquid', 'Liquid'),
+                                        ('injection', 'Injections')],
+                                       string="Medicament Form",
+                                       required=True,
+                                       help="Add the form of the medicine")
     quantity = fields.Integer(string="Quantity",
                               required=True,
                               help="Quantity of medicine")
@@ -203,3 +203,11 @@ class DentalPrescriptionLines(models.Model):
         """
         for rec in self:
             rec.total = rec.price * rec.quantity
+
+    @api.model
+    def create(self, vals):
+        """Ensure the medicament is marked as 'Is Medicine' when created"""
+        if 'medicament_id' in vals:
+            medicament = self.env['product.template'].browse(vals['medicament_id'])
+            medicament.write({'is_medicine': True})
+        return super(DentalPrescriptionLines, self).create(vals)
