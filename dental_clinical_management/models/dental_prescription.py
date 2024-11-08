@@ -28,6 +28,7 @@ class DentalPrescription(models.Model):
                               help="Token number of the patient")
     treatment_ids = fields.Many2many(related="appointment_id.treatment_ids",
                                      string="Treatments",
+                                     readonly=False,
                                      help="Treatments done for patient")
     cost = fields.Float(compute="_compute_total_cost",
                         string="Total Treatment Cost",
