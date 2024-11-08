@@ -92,6 +92,7 @@
                         <group colspan="12">
                             <group class="oe_subtotal_footer">
                                 <field name="grand_total" colspan="2"/>
+                                <field name="doctor_commission_amount" colspan="2"/>
                             </group>
                         </group>
                     </group>

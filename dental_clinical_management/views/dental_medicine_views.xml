@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <!-- Inherit the product page and added the Is Medicine Boolean -->
+    <!-- Inherit the product page and add the Is Medicine Boolean -->
     <record id="product_template_only_form_view" model="ir.ui.view">
         <field name="name">product.template.view.form.inherit.dental.clinical.management</field>
         <field name="model">product.template</field>
@@ -15,10 +15,12 @@
             <xpath expr="//field[@name='detailed_type']" position="before">
                 <field name="generic_name"/>
                 <field name="dosage_strength"/>
+                <field name="doctor_commission_percentage" string="Persentase Komisi Dokter (%)"/>
             </xpath>
         </field>
     </record>
-    <!-- Tree view  -->
+
+    <!-- Tree view -->
     <record id="product_template_tree_view" model="ir.ui.view">
         <field name="name">product.template.view.tree.inherit.dental.clinical.management</field>
         <field name="model">product.template</field>
@@ -27,6 +29,7 @@
             <xpath expr="//field[@name='name']" position="after">
                 <field name="generic_name"/>
                 <field name="dosage_strength"/>
+                <field name="doctor_commission_percentage" string="Komisi Dokter (%)"/>
             </xpath>
         </field>
     </record>

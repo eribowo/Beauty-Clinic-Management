@@ -111,6 +111,15 @@
     <menuitem id="medicine_frequency_main_menu" name="Medicament Frequency" parent="medical_procedures_main_menu" sequence="4" action="medicine_frequency_menu_action"/>
     <menuitem id="medical_questions_main_menu" name="Medical Questions" parent="medical_procedures_main_menu" sequence="5" action="medical_questions_menu_action"/>
     <menuitem id="insurance_main_menu" name="Insurance" parent="config_main_menu" sequence="3"/>
-    <menuitem id="insuarnce_company_main_menu" name="Insurance Company" parent="insurance_main_menu" sequence="1" action="insurance_company_menu_action"/>
+    <menuitem id="insurance_company_main_menu" name="Insurance Company" parent="insurance_main_menu" sequence="1" action="insurance_company_menu_action"/>
     <menuitem id="skin_type_main_menu" name="Skin Types" parent="medical_procedures_main_menu" sequence="6" action="beauty_skin_type_menu_action"/>
+
+    <!-- Menu Action view for Commission Settings -->
+    <record id="commission_settings_menu_action" model="ir.actions.act_window">
+        <field name="name">Commission Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+    </record>
+    <menuitem id="bonus_commission_main_menu" name="Bonus dan Komisi" parent="config_main_menu" sequence="4"/>
+    <menuitem id="commission_settings_main_menu" name="Commission Settings" parent="bonus_commission_main_menu" action="commission_settings_menu_action" sequence="1"/>
 </odoo>
