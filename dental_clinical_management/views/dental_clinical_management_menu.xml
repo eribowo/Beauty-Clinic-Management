@@ -94,12 +94,12 @@
     <menuitem id="dentist_menu_root"
               web_icon="dental_clinical_management,static/description/icon.png"
               name="Dental Clinic"/>
-    <menuitem id="dentist_menu_root" name="Dental Clinic" action="dental_appointment_menu_action"/>
-    <menuitem id="appointments_main_menu" name="Appointments" parent="dentist_menu_root" sequence="1" action="dental_appointment_menu_action"/>
-    <menuitem id="prescriptions_main_menu" name="Prescriptions" parent="dentist_menu_root" sequence="2" action="dental_prescription_menu_action"/>
-    <menuitem id="patients_main_menu" name="Patients" parent="dentist_menu_root" sequence="3" action="dental_patients_menu_action"/>
-    <menuitem id="dentist_main_menu" name="Dentist" parent="dentist_menu_root" sequence="4" action="dental_doctor_menu_action"/>
-    <menuitem id="config_main_menu" name="Configuration" parent="dentist_menu_root" sequence="5"/>
+    <menuitem id="dentist_menu_root" name="Beauty Clinic" action="dental_appointment_menu_action"/>
+    <menuitem id="appointments_main_menu" name="Pendaftaran" parent="dentist_menu_root" sequence="1" action="dental_appointment_menu_action"/>
+    <menuitem id="prescriptions_main_menu" name="Tindakan" parent="dentist_menu_root" sequence="2" action="dental_prescription_menu_action"/>
+    <menuitem id="patients_main_menu" name="Pasien" parent="dentist_menu_root" sequence="3" action="dental_patients_menu_action"/>
+    <menuitem id="dentist_main_menu" name="Team" parent="dentist_menu_root" sequence="4" action="dental_doctor_menu_action"/>
+    <menuitem id="config_main_menu" name="Konfigurasi" parent="dentist_menu_root" sequence="5"/>
     <menuitem id="physicians_main_menu" name="Physicians" parent="config_main_menu" sequence="1"/>
     <menuitem id="department_main_menu" name="Department" parent="physicians_main_menu" sequence="1" action="hr.hr_department_tree_action"/>
     <menuitem id="specialist_main_menu" name="Specialized" parent="physicians_main_menu" sequence="2" action="dental_specialist_menu_action"/>
@@ -116,7 +116,7 @@
 
     <!-- Menu Action view for Commission Settings -->
     <record id="commission_settings_menu_action" model="ir.actions.act_window">
-        <field name="name">Commission Settings</field>
+        <field name="name">Pengaturan Komisi</field>
         <field name="res_model">res.config.settings</field>
         <field name="view_mode">form</field>
     </record>
